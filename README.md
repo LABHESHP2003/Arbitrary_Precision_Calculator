@@ -1,2 +1,12 @@
-# Arbitrary_Precision_Calculator
-Project Brief: A calculator in C that supports arithmetic operations on arbitrarily large numbers using big‑number (multiple precision) arithmetic. APC stores numbers in a data structure (linked list as an Abstract Data Type) to allow for operations beyond built‑in fixed widths.
+## Arbitrary Precision Calculator (APC)
+
+The **Arbitrary Precision Calculator (APC)** is a command-line calculator implemented in **C** that supports arithmetic operations on numbers with an **arbitrary number of digits**, far beyond the limitations of standard data types like `int` or `long`.
+
+This project demonstrates how to implement **high-precision arithmetic** — including **addition**, **subtraction**, **multiplication**, and **division** — using **big-number (multiple-precision) arithmetic** techniques. To support arbitrarily large values, APC stores numbers in a **custom data structure**: a **linked list Abstract Data Type (ADT)**, allowing precise operations on numbers of virtually any size, limited only by available system memory.
+
+### Use Cases
+The calculator is ideal for applications where **mathematical precision** is critical, such as:
+
+- **Scientific computing**
+- **Cryptography**
+- **Financial and banking systems**
