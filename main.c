@@ -1,7 +1,11 @@
-/**************************************************************************************************************************************************************
- *Title		: main function(Driver function)
- *Description	: This function is used as the driver function for the all the functions
- ***************************************************************************************************************************************************************/
+/*******************************************************************************************************************************************************************
+ *Title           : main.c
+ *Description     : Main entry point for the Arbitrary Precision Calculator. Handles user input, detects operators, calls arithmetic functions, and controls the output display loop.
+ *Prototype       : int main(int argc, char *argv[]);
+ *Input Parameters: Commandline arguments or interactive input (two numbers and an operator).
+ *Output          : Prints the result or error message, returns exit status.
+ *******************************************************************************************************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -233,52 +237,61 @@ int main(int argc, char *argv[])
 		break;
 
 	case '*':
-    if (sign1 == sign2) {
-        // Result is positive if signs are same
-        if (multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS) {
-            print_list(headR);
-            status = SUCCESS;
-        } else {
-            status = FAILURE;
-        }
-    } else {
-        // Result is negative if signs differ
-        printf("-");
-        if (multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS) {
-            print_list(headR);
-            status = SUCCESS;
-        } else {
-            status = FAILURE;
-        }
-    }
-    break;
+		if (sign1 == sign2)
+		{
+			// Result is positive if signs are same
+			if (multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS)
+			{
+				print_list(headR);
+				status = SUCCESS;
+			}
+			else
+			{
+				status = FAILURE;
+			}
+		}
+		else
+		{
+			// Result is negative if signs differ
+			printf("-");
+			if (multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS)
+			{
+				print_list(headR);
+				status = SUCCESS;
+			}
+			else
+			{
+				status = FAILURE;
+			}
+		}
+		break;
 
 	case '/':
-    // Handle division
-    // Division sign: result is positive if signs are same, negative otherwise
-    if (sign1 == sign2)
-    {
-        if (division(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS)
-        {
-            print_list(headR);
-            status = SUCCESS;
-        }
-        else
-            status = FAILURE;
-    }
-    else
-    {
-        // Result negative
-        printf("-");
-        if (division(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS)
-        {
-            print_list(headR);
-            status = SUCCESS;
-        }
-        else
-            status = FAILURE;
-    }
-    break;
+		// Handle division
+		// Division sign: result is positive if signs are same, negative otherwise
+		if (sign1 == sign2)
+		{
+			if (division(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS)
+			{
+				print_list(headR);
+				status = SUCCESS;
+			}
+			else
+				status = FAILURE;
+		}
+		else
+		{
+			// Result negative
+			printf("-");
+			if (division(&head1, &tail1, &head2, &tail2, &headR, &tailR) == SUCCESS)
+			{
+				print_list(headR);
+				status = SUCCESS;
+			}
+			else
+				status = FAILURE;
+		}
+		break;
 
 	default:
 		printf("Invalid Input:-( Try again...\n");

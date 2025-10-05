@@ -1,14 +1,14 @@
-/*******************************************************************************************************************************************************************
-*Title			: Division
-*Description		: This function performs division of two given large numbers and store the result in the resultant list.
-*Prototype		: int division(Dlist **head1, Dlist **tail1, Dlist **head2, Dlist **tail2, Dlist **headR);
-*Input Parameters	: head1: Pointer to the first node of the first double linked list.
-			: tail1: Pointer to the last node of the first double linked list.
-			: head2: Pointer to the first node of the second double linked list.
-			: tail2: Pointer to the last node of the second double linked list.
-			: headR: Pointer to the first node of the resultant double linked list.
-*Output			: Status (SUCCESS / FAILURE)
-*******************************************************************************************************************************************************************/
+/***************************************************************************************************
+ * Title       : Division
+ * Description : Performs division of two large numbers represented as doubly linked lists and stores
+ *               the quotient in the resultant list.
+ * Prototype   : int division(Dlist **head1, Dlist **tail1, Dlist **head2, Dlist **tail2, Dlist **headR, Dlist **tailR);
+ * Input       : head1, tail1 - pointers to first and last nodes of the dividend list
+ *               head2, tail2 - pointers to first and last nodes of the divisor list
+ *               headR, tailR - pointers to first and last nodes of the quotient/result list
+ * Output      : SUCCESS on successful division, FAILURE otherwise
+ ***************************************************************************************************/
+
 #include "apc.h"
 #include <stdlib.h>
 
@@ -33,13 +33,14 @@ int division(Dlist **head1, Dlist **tail1, Dlist **head2, Dlist **tail2, Dlist *
         addition(&head_sum, &tail_sum, head2, tail2, &head_res, &tail_res);
 
         // if res > dividend -> break
-        if (compare_numbers(head_res, *head1) > 0){
-			free_list(&head_res, &tail_res);
-			break;
-		}
+        if (compare_numbers(head_res, *head1) > 0)
+        {
+            free_list(&head_res, &tail_res);
+            break;
+        }
 
         // sum = res
-		free_list(&head_sum, &tail_sum);
+        free_list(&head_sum, &tail_sum);
         head_sum = head_res;
         tail_sum = tail_res;
 
@@ -52,7 +53,7 @@ int division(Dlist **head1, Dlist **tail1, Dlist **head2, Dlist **tail2, Dlist *
         tail_count = tail_cnt;
     }
 
-	// Clean up
+    // Clean up
     free_list(&head_sum, &tail_sum);
     free_list(&head_one, &tail_one);
 

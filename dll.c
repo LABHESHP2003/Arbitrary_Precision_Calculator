@@ -1,9 +1,19 @@
+/*******************************************************************************************************************************************************************
+ * Title       : dll.c
+ * Description : Implements doubly linked list functions for arbitrary precision arithmetic, including list creation,
+ *               insertion, deletion, printing, memory cleanup, and removing leading zeros.
+ * Prototypes  : create_list_from_string, insert_at_last, insert_at_first, delete_at_first, print_list, free_list, delete_leading_zeros
+ * Inputs      : Strings and pointers to list heads/tails
+ * Outputs     : Success/failure codes or modifies lists and memory
+ *******************************************************************************************************************************************************************/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include"apc.h"
+#include "apc.h"
 
-int create_list_from_string(const char *num, Dlist **head, Dlist **tail){
+int create_list_from_string(const char *num, Dlist **head, Dlist **tail)
+{
     int size = strlen(num);
 
     char temp[2];
@@ -11,12 +21,14 @@ int create_list_from_string(const char *num, Dlist **head, Dlist **tail){
     *head = NULL;
     *tail = NULL;
 
-    for(int i = 0; i < size ; i++){
+    for (int i = 0; i < size; i++)
+    {
         temp[0] = num[i];
         temp[1] = '\0';
 
         int data = atoi(temp);
-        if(insert_at_last(head, tail, data) == FAILURE){
+        if (insert_at_last(head, tail, data) == FAILURE)
+        {
             printf("Error: Creating linked list of operands.\n");
             return FAILURE;
         }
@@ -25,10 +37,12 @@ int create_list_from_string(const char *num, Dlist **head, Dlist **tail){
     return SUCCESS;
 }
 
-int insert_at_last(Dlist **head, Dlist **tail, int data){
+int insert_at_last(Dlist **head, Dlist **tail, int data)
+{
 
     Dlist *new = malloc(sizeof(Dlist));
-    if(new == NULL){
+    if (new == NULL)
+    {
         printf("Error: Memory Allocation Failed\n");
         return FAILURE;
     }
@@ -36,12 +50,14 @@ int insert_at_last(Dlist **head, Dlist **tail, int data){
     new->prev = NULL;
     new->next = NULL;
 
-    //list empty
-    if(*head == NULL && *tail == NULL){
+    // list empty
+    if (*head == NULL && *tail == NULL)
+    {
         *head = *tail = new;
         return SUCCESS;
     }
-    else{//non empty list
+    else
+    { // non empty list
         (*tail)->next = new;
         new->prev = *tail;
         *tail = new;
@@ -49,40 +65,47 @@ int insert_at_last(Dlist **head, Dlist **tail, int data){
     }
 }
 
-int insert_at_first(Dlist **head, Dlist **tail, int data){
+int insert_at_first(Dlist **head, Dlist **tail, int data)
+{
 
     Dlist *new = malloc(sizeof(Dlist));
-    if(new == NULL){
+    if (new == NULL)
+    {
         printf("Error: Memory Allocation Failed\n");
         return FAILURE;
     }
     new->data = data;
     new->prev = NULL;
     new->next = *head;
-    
-    //list empty
-    if(*head == NULL && *tail == NULL){
+
+    // list empty
+    if (*head == NULL && *tail == NULL)
+    {
         *head = *tail = new;
     }
-    else{//non empty list
+    else
+    { // non empty list
         (*head)->prev = new;
         *head = new;
     }
     return SUCCESS;
 }
 
-int delete_at_first(Dlist **head,Dlist **tail){
-    //empty list
-    if(*head == NULL && *tail == NULL){
+int delete_at_first(Dlist **head, Dlist **tail)
+{
+    // empty list
+    if (*head == NULL && *tail == NULL)
+    {
         return FAILURE;
     }
-    //only single node in list
-    if((*head)->next == NULL){
+    // only single node in list
+    if ((*head)->next == NULL)
+    {
         free(*head);
         *head = *tail = NULL;
-        return SUCCESS; 
+        return SUCCESS;
     }
-    //non empty list
+    // non empty list
     Dlist *temp = *head;
     *head = temp->next;
     (*head)->prev = NULL;
@@ -124,8 +147,6 @@ void free_list(Dlist **head, Dlist **tail)
     *head = NULL;
     *tail = NULL;
 }
-
-
 
 void delete_leading_zeros(Dlist **head, Dlist **tail)
 {
